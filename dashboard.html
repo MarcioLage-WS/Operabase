@@ -1,1 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Dashboard</title>
+</head>
+<body>
 
+<h1>Dashboard Operabase</h1>
+<div id="userInfo"></div>
+
+<script type="module">
+import { supabase } from './js/supabaseClient.js'
+
+const { data: { user } } = await supabase.auth.getUser()
+
+if (!user) {
+  window.location.href = "index.html"
+}
+
+const { data: perfil, error } = await supabase
+  .from('perfis')
+  .select('*')
+  .eq('id', user.id)
+  .single()
+
+if (error || !perfil) {
+  alert("Usuário sem perfil. Contate o administrador.")
+}
+
+document.getElementById("userInfo").innerHTML = `
+  <p><strong>Nome:</strong> ${perfil.nome}</p>
+  <p><strong>Perfil:</strong> ${perfil.role}</p>
+  <p><strong>Empresa ID:</strong> ${perfil.empresa_id}</p>
+`
+</script>
+
+</body>
+</html>
