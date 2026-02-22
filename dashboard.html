@@ -1,13 +1,45 @@
 <!DOCTYPE html>
-<html>
+<html lang="pt-br">
 <head>
   <meta charset="UTF-8">
   <title>Dashboard</title>
+  <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body>
 
-<h1>Dashboard Operabase</h1>
-<div id="userInfo"></div>
+<body class="bg-slate-950 text-slate-200 min-h-screen">
+
+<div class="flex">
+
+  <!-- SIDEBAR -->
+  <aside class="w-64 bg-slate-900 min-h-screen p-4">
+    <h1 class="text-xl font-bold text-blue-500 mb-8">Operabase</h1>
+
+    <nav class="space-y-2">
+      <a href="dashboard.html" class="block px-3 py-2 rounded bg-slate-800">Dashboard</a>
+      <a href="novo-chamado.html" class="block px-3 py-2 rounded hover:bg-slate-800">Novo Chamado</a>
+    </nav>
+  </aside>
+
+  <!-- CONTEÚDO -->
+  <div class="flex-1">
+
+    <!-- HEADER -->
+    <header class="bg-slate-900 border-b border-slate-800 p-4 flex justify-between items-center">
+      <h2 class="text-lg font-semibold">Dashboard</h2>
+      <div id="userInfo" class="text-sm text-slate-400"></div>
+    </header>
+
+    <!-- MAIN -->
+    <main class="p-6">
+      <div class="bg-slate-900 p-6 rounded-xl border border-slate-800">
+        <h3 class="text-xl font-semibold mb-4">Bem-vindo ao Operabase</h3>
+        <div id="perfilCard"></div>
+      </div>
+    </main>
+
+  </div>
+
+</div>
 
 <script type="module">
 import { supabase } from './js/supabaseClient.js'
@@ -18,20 +50,17 @@ if (!user) {
   window.location.href = "index.html"
 }
 
-const { data: perfil, error } = await supabase
+const { data: perfil } = await supabase
   .from('perfis')
   .select('*')
   .eq('id', user.id)
   .single()
 
-if (error || !perfil) {
-  alert("Usuário sem perfil. Contate o administrador.")
-}
+document.getElementById("userInfo").innerText = perfil.nome + " (" + perfil.role + ")"
 
-document.getElementById("userInfo").innerHTML = `
-  <p><strong>Nome:</strong> ${perfil.nome}</p>
+document.getElementById("perfilCard").innerHTML = `
+  <p><strong>Empresa:</strong> ${perfil.empresa_id}</p>
   <p><strong>Perfil:</strong> ${perfil.role}</p>
-  <p><strong>Empresa ID:</strong> ${perfil.empresa_id}</p>
 `
 </script>
 
