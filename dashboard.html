@@ -2,7 +2,7 @@
 <html lang="pt-br">
 <head>
   <meta charset="UTF-8">
-  <title>Dashboard</title>
+  <title>Operabase - Performance</title>
   <script src="https://cdn.tailwindcss.com"></script>
 </head>
 
@@ -11,159 +11,148 @@
 <div class="flex">
 
   <!-- SIDEBAR -->
-  <aside class="w-64 bg-slate-900 border-r border-slate-800 min-h-screen flex flex-col">
-
-    <div class="p-6 border-b border-slate-800 flex items-center gap-3">
-      <div class="w-8 h-8 rounded-lg bg-gradient-to-r from-blue-500 to-purple-500 flex items-center justify-center font-bold">
-        ⚡
-      </div>
-      <span class="font-bold text-lg">OPERABASE</span>
-    </div>
-
-    <nav class="flex-1 p-4 space-y-2">
-
-      <a href="dashboard.html"
-         class="flex items-center gap-3 px-4 py-2 rounded-lg bg-gradient-to-r from-blue-600 to-purple-600">
-        📊 Dashboard
-      </a>
-
-      <a href="novo-chamado.html"
-         class="flex items-center gap-3 px-4 py-2 rounded-lg hover:bg-slate-800 transition">
-        🎫 Chamados
-      </a>
-
-      <a href="#"
-         class="flex items-center gap-3 px-4 py-2 rounded-lg hover:bg-slate-800 transition">
-        🗂️ Kanban
-      </a>
-
-      <a href="#"
-         class="flex items-center gap-3 px-4 py-2 rounded-lg hover:bg-slate-800 transition">
-        📈 Relatórios
-      </a>
-
+  <aside class="w-64 bg-slate-900 border-r border-slate-800 min-h-screen p-6">
+    <h1 class="text-xl font-bold mb-6">OPERABASE</h1>
+    <nav class="space-y-3 text-sm">
+      <a href="dashboard.html" class="block px-3 py-2 rounded bg-slate-800">Dashboard</a>
+      <a href="novo-chamado.html" class="block px-3 py-2 rounded hover:bg-slate-800">Chamados</a>
     </nav>
-
-    <div class="p-4 border-t border-slate-800 text-sm text-slate-400">
-      v1.0 Operabase
-    </div>
-
   </aside>
 
-
   <!-- CONTEÚDO -->
-  <div class="flex-1 flex flex-col">
+  <div class="flex-1 p-8 space-y-10">
 
-    <!-- HEADER -->
-    <header class="bg-slate-900 border-b border-slate-800 px-6 py-4 flex justify-between items-center">
+    <h2 class="text-2xl font-semibold">Painel de Performance</h2>
 
-      <h1 class="text-xl font-semibold">Dashboard</h1>
+    <!-- KPI MÊS -->
+    <div class="grid grid-cols-5 gap-6" id="kpis"></div>
 
-      <div id="userInfo" class="flex items-center gap-3">
-        <div class="w-8 h-8 rounded-full bg-gradient-to-r from-purple-500 to-blue-500 flex items-center justify-center text-sm font-bold">
-          M
-        </div>
-        <div class="text-sm">
-          <div id="userName" class="font-medium"></div>
-          <div class="text-xs text-slate-400" id="userRole"></div>
-        </div>
-      </div>
+    <!-- RISCO -->
+    <div class="grid grid-cols-4 gap-6" id="risco"></div>
 
-    </header>
+    <!-- VOLUME MENSAL -->
+    <div class="bg-slate-900 p-6 rounded-xl border border-slate-800">
+      <h3 class="text-lg font-semibold mb-4">Volume últimos 6 meses</h3>
+      <table class="w-full text-sm">
+        <thead class="text-slate-400 border-b border-slate-800">
+          <tr>
+            <th class="text-left py-2">Mês</th>
+            <th>Total</th>
+            <th>Resolvidos</th>
+            <th>Tempo Médio</th>
+            <th>Satisfação</th>
+          </tr>
+        </thead>
+        <tbody id="volumeTabela"></tbody>
+      </table>
+    </div>
 
-
-    <!-- MAIN -->
-    <main class="p-6 space-y-8">
-
-      <!-- HERO -->
-      <div class="rounded-xl p-6 bg-gradient-to-r from-blue-900/40 to-purple-900/40 border border-slate-800">
-        <h2 class="text-2xl font-semibold mb-2">Olá 👋</h2>
-        <p class="text-slate-400">Aqui está o resumo da sua operação.</p>
-      </div>
-
-      <!-- CARDS -->
-      <div class="grid grid-cols-3 gap-6">
-
-        <div class="bg-slate-900 p-6 rounded-xl border border-slate-800 hover:border-blue-500 transition">
-          <p class="text-slate-400 text-sm">Total de Chamados</p>
-          <h3 class="text-3xl font-bold mt-2">128</h3>
-          <p class="text-xs text-green-400 mt-1">+12% este mês</p>
-        </div>
-
-        <div class="bg-slate-900 p-6 rounded-xl border border-slate-800 hover:border-yellow-500 transition">
-          <p class="text-slate-400 text-sm">Em Aberto</p>
-          <h3 class="text-3xl font-bold mt-2">23</h3>
-          <p class="text-xs text-yellow-400 mt-1">5 aguardando SLA</p>
-        </div>
-
-        <div class="bg-slate-900 p-6 rounded-xl border border-slate-800 hover:border-red-500 transition">
-          <p class="text-slate-400 text-sm">SLA Violado</p>
-          <h3 class="text-3xl font-bold mt-2">4</h3>
-          <p class="text-xs text-red-400 mt-1">Ação imediata necessária</p>
-        </div>
-
-      </div>
-
-      <!-- TABELA CHAMADOS RECENTES -->
-      <div class="bg-slate-900 rounded-xl border border-slate-800 p-6">
-        <h3 class="text-lg font-semibold mb-4">Chamados Recentes</h3>
-
-        <table class="w-full text-sm">
-          <thead class="text-slate-400 border-b border-slate-800">
-            <tr>
-              <th class="text-left py-2">ID</th>
-              <th class="text-left py-2">Título</th>
-              <th class="text-left py-2">Status</th>
-              <th class="text-left py-2">Prioridade</th>
-            </tr>
-          </thead>
-          <tbody class="divide-y divide-slate-800">
-            <tr class="hover:bg-slate-800">
-              <td class="py-3">#1024</td>
-              <td>Erro no sistema financeiro</td>
-              <td class="text-yellow-400">Em andamento</td>
-              <td class="text-red-400">Alta</td>
-            </tr>
-            <tr class="hover:bg-slate-800">
-              <td class="py-3">#1023</td>
-              <td>Usuário sem acesso</td>
-              <td class="text-green-400">Resolvido</td>
-              <td>Média</td>
-            </tr>
-            <tr class="hover:bg-slate-800">
-              <td class="py-3">#1022</td>
-              <td>Integração API falhando</td>
-              <td class="text-yellow-400">Em aberto</td>
-              <td>Alta</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-
-    </main>
+    <!-- RANKING -->
+    <div class="bg-slate-900 p-6 rounded-xl border border-slate-800">
+      <h3 class="text-lg font-semibold mb-4">Performance Analistas</h3>
+      <table class="w-full text-sm">
+        <thead class="text-slate-400 border-b border-slate-800">
+          <tr>
+            <th>Responsável</th>
+            <th>Total</th>
+            <th>Resolvidos</th>
+            <th>Tempo Médio</th>
+            <th>Satisfação</th>
+            <th>% SLA OK</th>
+          </tr>
+        </thead>
+        <tbody id="rankingTabela"></tbody>
+      </table>
+    </div>
 
   </div>
-
 </div>
-
 
 <script type="module">
 import { supabase } from './js/supabaseClient.js'
 
-const { data: { user } } = await supabase.auth.getUser()
+// KPI MÊS
+const { data: kpi } = await supabase.from('vw_kpi_mes_atual').select('*').single()
+const { data: comparacao } = await supabase.from('vw_comparacao_mensal').select('*').single()
+const { data: risco } = await supabase.from('vw_sla_risco').select('*').single()
+const { data: volume } = await supabase.from('vw_volume_mensal_6_meses').select('*')
+const { data: ranking } = await supabase.from('vw_performance_analistas').select('*')
 
-if (!user) {
-  window.location.href = "index.html"
-}
+// KPIs
+document.getElementById("kpis").innerHTML = `
+<div class="bg-slate-900 p-5 rounded-xl border border-slate-800">
+  <p class="text-sm text-slate-400">Total Mês</p>
+  <h3 class="text-2xl font-bold">${kpi.total_chamados_mes}</h3>
+</div>
 
-const { data: perfil } = await supabase
-  .from('perfis')
-  .select('*')
-  .eq('id', user.id)
-  .single()
+<div class="bg-slate-900 p-5 rounded-xl border border-slate-800">
+  <p class="text-sm text-slate-400">Variação</p>
+  <h3 class="text-2xl font-bold">${comparacao.variacao_percentual}%</h3>
+</div>
 
-document.getElementById("userName").innerText = perfil.nome
-document.getElementById("userRole").innerText = perfil.role
+<div class="bg-slate-900 p-5 rounded-xl border border-slate-800">
+  <p class="text-sm text-slate-400">Tempo Médio</p>
+  <h3 class="text-2xl font-bold">${kpi.tempo_medio_resolucao ?? 0}h</h3>
+</div>
+
+<div class="bg-slate-900 p-5 rounded-xl border border-slate-800">
+  <p class="text-sm text-slate-400">% SLA OK</p>
+  <h3 class="text-2xl font-bold">${kpi.percentual_dentro_sla ?? 0}%</h3>
+</div>
+
+<div class="bg-slate-900 p-5 rounded-xl border border-slate-800">
+  <p class="text-sm text-slate-400">Satisfação</p>
+  <h3 class="text-2xl font-bold">${kpi.satisfacao_media ?? 0}</h3>
+</div>
+`
+
+// RISCO
+document.getElementById("risco").innerHTML = `
+<div class="bg-red-900/30 p-5 rounded-xl border border-red-500">
+  <p>SLA Violado</p>
+  <h3 class="text-2xl font-bold">${risco.chamados_sla_violado}</h3>
+</div>
+
+<div class="bg-yellow-900/30 p-5 rounded-xl border border-yellow-500">
+  <p>Em Alerta</p>
+  <h3 class="text-2xl font-bold">${risco.chamados_em_alerta}</h3>
+</div>
+
+<div class="bg-purple-900/30 p-5 rounded-xl border border-purple-500">
+  <p>Críticos</p>
+  <h3 class="text-2xl font-bold">${risco.chamados_criticos}</h3>
+</div>
+
+<div class="bg-slate-900 p-5 rounded-xl border border-slate-700">
+  <p>Total Abertos</p>
+  <h3 class="text-2xl font-bold">${risco.total_abertos}</h3>
+</div>
+`
+
+// VOLUME
+document.getElementById("volumeTabela").innerHTML =
+volume.map(v => `
+<tr class="border-b border-slate-800">
+  <td class="py-2">${v.mes}</td>
+  <td>${v.total_chamados}</td>
+  <td>${v.total_resolvidos}</td>
+  <td>${v.tempo_medio_resolucao ?? 0}</td>
+  <td>${v.satisfacao_media ?? 0}</td>
+</tr>
+`).join('')
+
+// RANKING
+document.getElementById("rankingTabela").innerHTML =
+ranking.map(r => `
+<tr class="border-b border-slate-800">
+  <td>${r.responsavel_id}</td>
+  <td>${r.total_atendimentos}</td>
+  <td>${r.total_resolvidos}</td>
+  <td>${r.tempo_medio_resolucao ?? 0}</td>
+  <td>${r.satisfacao_media ?? 0}</td>
+  <td>${r.percentual_dentro_sla ?? 0}%</td>
+</tr>
+`).join('')
 </script>
 
 </body>
